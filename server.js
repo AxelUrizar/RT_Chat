@@ -18,6 +18,8 @@ app.get('/', (req, res) => {
   res.send('Server is running')
 })
 
+let users = []
+
 io.on('connection', (socket) => {
   console.log('New User Connected: ' + socket.id)
 
@@ -25,8 +27,24 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('message', data)
   })
 
+  socket.on('join', (userName) => {
+    socket.broadcast.emit('join', userName)
+    users.push(userName)
 
-  socket.on('disconnect', () => console.log('User disconnected: ' + socket.id))
+
+    socket.on('disconnect', () => {
+      users = users.filter((user) => user !== userName)
+      socket.broadcast.emit('leave', userName)
+    })
+  })
+
+  socket.on('getRoomUsers', () => {
+    socket.broadcast.emit('getRoomUsers', users)
+  })
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected: ' + socket.id)
+  })
 })
 
 httpServer.listen(PORT, () => {

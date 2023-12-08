@@ -1,14 +1,17 @@
+import { useSocketStore } from "../store/useSocketStore"
 import { useUserStore } from "../store/useUserStore"
 import { useNavigate } from "react-router-dom"
 
 export function UserForm () {
   const { setUser } = useUserStore()
+  const { socket } = useSocketStore()
   const navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     const username = event.target.username.value
     setUser(username)
+    socket.emit('join', username)
     navigate('/chat')
   }
   return (

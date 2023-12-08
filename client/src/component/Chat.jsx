@@ -1,25 +1,39 @@
 import { useEffect, useState } from 'react'
-import { useSocket } from '../hooks/useSocket.js'
-import { useUser } from '../hooks/useUser.js'
+import { useNavigate } from 'react-router-dom'
+import { useUserStore } from '../store/useUserStore.js'
 
-import { UserForm } from '../component/UserForm.jsx'
 import { MessageForm } from '../component/MessageForm.jsx'
-// import { MessageList } from '../component/MessageList.jsx'
+import { MessageList } from './MessageList.jsx'
+import { UserList } from './UserList.jsx'
+import { useSocketStore } from '../store/useSocketStore.js'
 
 export function Chat() {
-  const { getSocket } = useSocket()
-  const { user } = useUser()
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([{ user: 'Bot', message: 'Welcome to the chat!' }])
+  const { user, addUsers, setUsers } = useUserStore()
+  const { socket } = useSocketStore()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    getSocket()
+    if (!user) {
+      navigate('/')
+    }
+
+    socket.on('join', (userName) => addUsers(userName))
+    socket.on('getRoomUsers', (users) => setUsers(users))
+    socket.on('leave', (userName) => {
+      setMessages(state => [...state, { user: 'Bot', message: `${userName} has left the chat` }])
+      socket.emit('getRoomUsers')
+    })
+
+    socket.emit('getRoomUsers')
   }, [])
 
   return (
     <div>
-      <h2 className="text-3xl text-center">Real Time Online Chat</h2>
-          {/* <MessageList messages={messages} /> */}
-          <MessageForm setMessages={setMessages} />
+      <UserList />
+      <hr />
+      <MessageList messages={messages} />
+      <MessageForm setMessages={setMessages} />
     </div>
   )
 }
