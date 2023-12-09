@@ -5,5 +5,6 @@ export const useUserStore = create((set) => ({
   users: [],
   setUser: (username) => set((state) => ({ user: username, users: [...state.users, username ]})),
   addUsers: (username) => set((state) => ({ users: [...state.users, username] })),
-  setUsers: (users) => set((state) => ({ users: users })),
+  setUsers: (users) => set(() => ({ users: users })),
+  removeUsers: (username) => set((state) => ({ users: state.users.filter(user => user !== username) }))
 }))

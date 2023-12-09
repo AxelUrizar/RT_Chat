@@ -25,15 +25,15 @@ export const MessageForm = ({ setMessages }) => {
   }
 
   return (
-    <form className="flex justify-center items-center gap-3" onSubmit={handleSubmit} >
+    <form className="w-full justify-self-end flex gap-3" onSubmit={handleSubmit} >
       <input
-        className="border-2 border-gray-300 rounded-md w-1/2 p-2"
+        className="border-2 border-gray-300 rounded-md flex-grow p-2"
         type="text"
         placeholder="Type a message..."
         value={message}
         onChange={(event) => setMessage(event.target.value)}
       />
-      <button className="bg-blue-500 hover:bg-blue-700 transition-all text-white font-bold py-2 px-4 rounded" type="submit" >Send</button>
+      <button className="bg-violet-600 hover:bg-violet-700 transition-all text-white font-bold py-2 px-4 rounded" type="submit" >Send</button>
     </form>
   )
 }

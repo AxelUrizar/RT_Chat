@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  color: #000000;
+}
+/* #chat { */
+/*   display: grid; */
+/*   grid-template-rows: 100px 5px 1fr 100px; */
+/*   grid-template-areas:  */
+/*   "userList" */
+/*   "hr" */
+/*   "messageList" */
+/*   "messageForm" */
+/*   ; */
+/* } */

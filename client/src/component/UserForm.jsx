@@ -15,20 +15,20 @@ export function UserForm () {
     navigate('/chat')
   }
   return (
-    <div className="flex flex-col items-center justify-center min-w-full min-h-screen">
-      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center">
-        <label htmlFor="username" className="text-2xl text-center">
-          Enter your username:
+    <div className="flex flex-col items-center justify-center w-full h-screen">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center gap-5">
+        <label htmlFor="username" className="text-2xl">
+          Username
         </label>
         <input
           type="text"
           name="username"
           id="username"
-          className="border-2 border-black rounded-md p-2 m-2"
+          className="border-2 border-black rounded-md p-2"
         />
         <button
           type="submit"
-          className="border-2 border-black rounded-md p-2 m-2"
+          className="bg-violet-500 font-bold rounded-md py-2 px-4"
         >
           Enter
         </button>
