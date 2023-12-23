@@ -12,7 +12,7 @@ export function UserForm () {
     const username = event.target.username.value
     setUser(username)
     socket.emit('join', username)
-    navigate('/chat')
+    navigate('/RT_Chat/chat')
   }
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen">

@@ -17,7 +17,7 @@ export function Chat() {
 
   useEffect(() => {
     if (!user) {
-      navigate('/')
+      navigate('/RT_Chat')
     }
 
     socket.on('join', (userName) => addUsers(userName))
