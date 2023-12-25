@@ -10,6 +10,7 @@ export function UserForm () {
   const handleSubmit = (event) => {
     event.preventDefault()
     const username = event.target.username.value
+    if(!username) return
     setUser(username)
     socket.emit('join', username)
     navigate('/RT_Chat/chat')
@@ -28,7 +29,7 @@ export function UserForm () {
         />
         <button
           type="submit"
-          className="bg-violet-500 font-bold rounded-md py-2 px-4"
+          className="bg-violet-500 font-bold rounded-3xl py-2 px-4"
         >
           Enter
         </button>

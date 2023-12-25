@@ -34,11 +34,16 @@ export function Chat() {
   })
 
   return (
-    <div id='chat' className='h-full min-w-full flex flex-col justify-start py-5'>
+    <div className='h-full w-full flex flex-col md:flex-row justify-start gap-8 py-5'>
       <UserList />
-      <hr />
-      <MessageList messages={messages} />
-      <MessageForm setMessages={setMessages} />
+      <div className='h-full flex-grow flex flex-col'>
+        <h2 className="hidden md:block text-5xl text-center font-bold">Online Chat</h2>
+        <hr className='hidden md:block my-8' />
+        <div className='flex-grow flex flex-col gap-5'>
+          <MessageList messages={messages} />
+          <MessageForm setMessages={setMessages} />
+        </div>
+      </div>
     </div>
   )
 }
